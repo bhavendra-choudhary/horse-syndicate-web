@@ -48,7 +48,7 @@ python -m playwright install chromium
 python generate_showcase.py
 ```
 
-It creates `1_Landing_Page.png`, `2_About_Upcoming_Horses.png`, `3_Contact_Page.png`, `Mobile_Responsive_View.png`, and the 1920×1400 `Syndicate_Website_Showcase.png`.
+It creates `1_Landing_Page.png`, `2_About_Upcoming_Horses.png`, `3_Contact_Page.png`, `Mobile_Responsive_View.png`, the 1920×1400 `Syndicate_Website_Showcase.png`, and a 12-frame `Syndicate_Live_Preview.gif`. The intro plays once per browser session; use the bottom-left replay pill to preview it again.
 
 ### Form fallback
 

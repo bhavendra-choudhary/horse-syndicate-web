@@ -7,12 +7,14 @@ Then run:
     python generate_showcase.py
 """
 from pathlib import Path
+from io import BytesIO
 from PIL import Image, ImageDraw, ImageFont
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).parent
 W, H = 1920, 1400
 BOARD = ROOT / "Syndicate_Website_Showcase.png"
+GIF = ROOT / "Syndicate_Live_Preview.gif"
 PAGES = [
     ("index.html", "1_Landing_Page.png", "01 / LANDING"),
     ("about.html", "2_About_Upcoming_Horses.png", "02 / THE MAISON + HORSES"),
@@ -41,32 +43,109 @@ def render_pages():
         browser = playwright.chromium.launch(headless=True)
         desktop = browser.new_page(viewport={"width": 1440, "height": 900}, device_scale_factor=1)
         for filename, screenshot, _ in PAGES:
-            desktop.goto((ROOT / filename).as_uri(), wait_until="domcontentloaded")
+            desktop.goto((ROOT / filename).as_uri(), wait_until="commit")
             try:
                 desktop.wait_for_load_state("networkidle", timeout=15000)
             except Exception:
                 pass
-            desktop.wait_for_timeout(5000 if filename == "index.html" else 1500)
-            desktop.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-            desktop.wait_for_timeout(800)
+            desktop.wait_for_timeout(1500)
+            height = desktop.evaluate("document.body.scrollHeight")
+            for position in range(0, height, 900):
+                desktop.evaluate("(y) => window.scrollTo(0, y)", position)
+                desktop.wait_for_timeout(180)
             desktop.evaluate("window.scrollTo(0, 0)")
             desktop.wait_for_timeout(400)
             desktop.screenshot(path=str(ROOT / screenshot), full_page=True)
             if filename == "about.html":
                 desktop.locator(".horses").screenshot(path=str(ROOT / "About_Upcoming_Horses_Grid.png"))
         mobile = browser.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=1)
-        mobile.goto((ROOT / "index.html").as_uri(), wait_until="domcontentloaded")
+        mobile.goto((ROOT / "index.html").as_uri(), wait_until="commit")
         try:
             mobile.wait_for_load_state("networkidle", timeout=15000)
         except Exception:
             pass
-        mobile.wait_for_timeout(5000)
-        mobile.evaluate("window.scrollTo(0, document.body.scrollHeight)")
-        mobile.wait_for_timeout(700)
+        mobile.wait_for_timeout(1500)
+        height = mobile.evaluate("document.body.scrollHeight")
+        for position in range(0, height, 700):
+            mobile.evaluate("(y) => window.scrollTo(0, y)", position)
+            mobile.wait_for_timeout(160)
         mobile.evaluate("window.scrollTo(0, 0)")
         mobile.wait_for_timeout(300)
         mobile.screenshot(path=str(ROOT / "Mobile_Responsive_View.png"), full_page=True)
+        capture_live_preview(browser)
         browser.close()
+
+
+def viewport_frame(page):
+    return Image.open(BytesIO(page.screenshot(type="png"))).convert("RGB")
+
+
+def capture_live_preview(browser):
+    """Capture a compact, real-browser sequence for the contest preview GIF."""
+    page = browser.new_page(viewport={"width": 1280, "height": 800}, device_scale_factor=1)
+    page.goto((ROOT / "index.html").as_uri(), wait_until="commit")
+    try:
+        page.wait_for_load_state("networkidle", timeout=15000)
+    except Exception:
+        pass
+    frames = []
+    for delay in (250, 750, 1250):
+        page.wait_for_timeout(delay if not frames else delay - (250 if len(frames) == 1 else 750))
+        frames.append(viewport_frame(page))
+    page.wait_for_timeout(1500)
+    page.evaluate("window.scrollTo(0, 0)")
+    frames.append(viewport_frame(page))
+    page.evaluate("window.scrollTo(0, document.querySelector('#command-dashboard')?.offsetTop || 900)")
+    page.wait_for_timeout(500)
+    frames.append(viewport_frame(page))
+    page.evaluate("window.scrollTo(0, document.querySelector('#command-dashboard')?.offsetTop || 900)")
+    page.wait_for_timeout(900)
+    frames.append(viewport_frame(page))
+
+    for filename, selector in (("about.html", ".horses"), ("about.html", "[data-horse-grid]"), ("about.html", "[data-horse-grid]")):
+        page.goto((ROOT / filename).as_uri(), wait_until="commit")
+        try:
+            page.wait_for_load_state("networkidle", timeout=15000)
+        except Exception:
+            pass
+        page.wait_for_timeout(1500)
+        if selector != ".horses":
+            page.evaluate("(selector) => window.scrollTo(0, document.querySelector(selector)?.offsetTop || 700)", selector)
+            page.wait_for_timeout(400)
+        frames.append(viewport_frame(page))
+
+    page.goto((ROOT / "contact.html").as_uri(), wait_until="commit")
+    try:
+        page.wait_for_load_state("networkidle", timeout=15000)
+    except Exception:
+        pass
+    page.wait_for_timeout(1500)
+    frames.append(viewport_frame(page))
+    page.evaluate("window.scrollTo(0, document.querySelector('.contact-layout')?.offsetTop || 600)")
+    page.wait_for_timeout(450)
+    frames.append(viewport_frame(page))
+    page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+    page.wait_for_timeout(450)
+    frames.append(viewport_frame(page))
+    page.close()
+
+    prepared = []
+    for index, frame in enumerate(frames[:12]):
+        frame.thumbnail((1280, 800), Image.Resampling.LANCZOS)
+        canvas = Image.new("RGB", (1280, 800), "#0A0B0E")
+        canvas.paste(frame, ((1280 - frame.width) // 2, (800 - frame.height) // 2))
+        ImageDraw.Draw(canvas).point((index, 0), fill="#D4AF37")
+        prepared.append(canvas.quantize(colors=128, method=Image.Quantize.MEDIANCUT))
+    prepared[0].save(
+        GIF,
+        save_all=True,
+        append_images=prepared[1:],
+        duration=850,
+        loop=0,
+        optimize=True,
+        disposal=2,
+    )
+    print(f"Generated {GIF} ({GIF.stat().st_size / 1024 / 1024:.2f} MB)")
 
 
 def fit_image(image, size):
