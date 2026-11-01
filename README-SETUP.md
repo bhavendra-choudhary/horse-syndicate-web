@@ -1,4 +1,4 @@
-# Maison Thoroughbred — 2-minute setup
+# Vanguard Thoroughbreds — 2-minute setup
 
 ## 1. Put the files online
 
@@ -9,7 +9,7 @@ Keep all files in the same folder and upload them to your web host, including th
 Open `site-content.js` in any text editor. Find:
 
 ```js
-email: "hello@maisonthoroughbred.com"
+email: "concierge@vanguardthoroughbreds.com"
 ```
 
 Replace the address with your inbox. The contact links and enquiry form will update automatically. FormSubmit may send a one-time confirmation email the first time you use a new address.

@@ -1,42 +1,42 @@
 // Central editing file: update the brand, inbox, copy, horse profiles and image paths here.
 window.SYNDICATE_CONFIG = {
-  brand: { name: "Maison Thoroughbred", shortName: "Maison TB", tagline: "Ownership, elevated.", colors: { charcoal: "#111111", white: "#FFFFFF", warmWhite: "#F8F7F4", gold: "#C5A059" } },
-  contact: { email: "hello@maisonthoroughbred.com", phone: "+44 (0)20 7946 0188", location: "Newmarket, Suffolk · By appointment" },
+  brand: { name: "Vanguard Thoroughbreds", shortName: "Vanguard TB", tagline: "Command the rail. Own the legacy.", colors: { charcoal: "#111111", white: "#FFFFFF", warmWhite: "#F8F7F4", gold: "#C5A059" } },
+  contact: { email: "concierge@vanguardthoroughbreds.com", phone: "+1 (859) 555-0194", location: "Lexington, Kentucky · Saratoga Springs (by appointment)" },
   images: { hero: "images/hero-racehorse.jpg", story: "images/story-horse.jpg", horses: ["images/horse-1.jpg", "images/horse-2.jpg", "images/horse-3.jpg"] },
   home: {
-    status: "2026 Racing Season · Shares now open",
-    headline: "Own the moment.<br><em>Live the race.</em>",
-    intro: "A private circle of owners, exceptional Thoroughbreds and a more considered way to experience the sport we love.",
-    valueTitle: "The thrill of the Thoroughbred, <em>without the noise.</em>",
-    valueBody: "Maison Thoroughbred curates the bloodstock, expertise and access. You join the story with complete clarity, from first gallop to winner’s enclosure.",
+    status: "2026 Keeneland & Saratoga acquisitions open",
+    headline: "Command the Rail.<br><em>Own the Legacy.</em>",
+    intro: "Direct fractional ownership in elite Grade-1 caliber Thoroughbreds. Curated bloodlines, Hall-of-Fame trainers, and full paddock-to-winner's-circle access.",
+    valueTitle: "Championship Pedigrees.<br><em>Institutional Transparency.</em>",
+    valueBody: "Vanguard Thoroughbreds gives a select circle of partners direct access to elite bloodstock, disciplined reporting and the moments that define a racing legacy.",
     metrics: [["18+", "Stakes performers"], ["5–25%", "Flexible share tiers"], ["100%", "Transparent monthly reports"], ["VIP", "Owners’ enclosure access"]],
     steps: [
-      { number: "01", title: "Meet your horse", body: "A considered shortlist of athletes chosen for pedigree, performance and potential." },
-      { number: "02", title: "Choose your share", body: "Flexible 5%, 10% and 25% tiers, structured with clarity from day one." },
-      { number: "03", title: "Live every race", body: "Stable access, monthly reports and the electric theatre of race day." }
+      { number: "01", title: "Select the bloodline", body: "Review a disciplined shortlist of Grade-1 caliber athletes selected for pedigree, athleticism and upside." },
+      { number: "02", title: "Define your equity", body: "Choose a transparent 5%, 10% or 25% ownership position with economics understood upfront." },
+      { number: "03", title: "Enter the circle", body: "Receive every training report, paddock invitation and race-day access from first work to winner's circle." }
     ],
     testimonials: [
-      ["“It feels less like an investment and more like being invited into a world I have always admired.”", "— James W., Founder & owner"],
-      ["“The transparency is exceptional. We know where the horse is, how she is progressing and what comes next.”", "— Olivia R., Maison owner"]
+      ["“Vanguard delivers the rare combination of elite access and institutional-level reporting. Every decision is made with conviction.”", "— James W., Founding Partner"],
+      ["“The bloodstock is exceptional, but the discipline around ownership is what sets this syndicate apart.”", "— Olivia R., Vanguard Partner"]
     ]
   },
   about: {
     eyebrow: "Heritage, reimagined",
-    headline: "A more considered<br><em>way to own.</em>",
-    storyTitle: "The sport we love.<br><em>The experience we believe in.</em>",
-    storyBody: "Born in Newmarket and shaped by a lifelong respect for the Thoroughbred, Maison was created for people who want to feel closer to racing — not buried in its complexity.",
-    mission: "To build a modern ownership community around brilliant horses, trusted expertise and the belief that every race day should feel like an occasion.",
-    philosophy: ["Pedigree with purpose", "Temperament matters", "Progress over promise"]
+    headline: "Built for the<br><em>Pursuit of Classic Glory.</em>",
+    storyTitle: "American racing heritage.<br><em>Modern ownership discipline.</em>",
+    storyBody: "Vanguard was built for partners who expect more from Thoroughbred ownership: uncommon bloodlines, respected trainers, precise communication and a seat inside the sport's defining moments.",
+    mission: "To compound the power of elite American racing through disciplined bloodstock selection, clear economics and a true owner's proximity to the horse.",
+    philosophy: ["Pedigree with purpose", "Athleticism under pressure", "Performance over promise"]
   },
   horses: [
-    { name: "Aurelia", category: "Fillies", age: "3yo filly", pedigree: "Frankel × Luna Mare", sire: "Frankel", dam: "Luna Mare", trainer: "Ralph Beckett", availability: "2 shares remaining", remaining: 20, image: 0, note: "A balanced, athletic filly with an electric turn of foot. Her first two starts have suggested a deep well of improvement." },
-    { name: "Nocturne", category: "2YO Colts", age: "2yo colt", pedigree: "Dubawi × Night Garden", sire: "Dubawi", dam: "Night Garden", trainer: "Charlie Appleby", availability: "Taking reservations", remaining: 55, image: 1, note: "Beautifully bred and progressing through his early education with a calm, professional attitude." },
-    { name: "Valentino", category: "In Training", age: "4yo gelding", pedigree: "Sea The Stars × Valentina", sire: "Sea The Stars", dam: "Valentina", trainer: "William Haggas", availability: "1 share remaining", remaining: 10, image: 2, note: "A proven performer with the attitude and experience to make this season his most compelling yet." }
+    { name: "Aurelia", category: "Fillies", age: "3yo filly", pedigree: "Into Mischief × Golden Hour", sire: "Into Mischief", dam: "Golden Hour", trainer: "Brad H. Cox", circuit: "Keeneland / Saratoga", availability: "Only 15% remaining", remaining: 15, image: 0, note: "An athletic filly with a sharp turn of foot and the composure to thrive on the biggest American stages." },
+    { name: "Nocturne", category: "2YO Colts", age: "2yo colt", pedigree: "Curlin × Midnight Bloom", sire: "Curlin", dam: "Midnight Bloom", trainer: "Todd A. Pletcher", circuit: "Belmont / Saratoga", availability: "Only 25% remaining", remaining: 25, image: 1, note: "A deep-bodied colt with a professional mind, scope to develop and a pedigree built for classic distance." },
+    { name: "Valentino", category: "In Training", age: "4yo colt", pedigree: "Quality Road × Valentina", sire: "Quality Road", dam: "Valentina", trainer: "Chad C. Brown", circuit: "Santa Anita / Keeneland", availability: "Only 10% remaining", remaining: 10, image: 2, note: "A proven performer with tactical speed, polished racecraft and an appetite for championship company." }
   ],
   faqs: [
     ["How does a syndicate share work?", "You own a defined percentage of a racehorse through a simple syndicate structure. We manage the day-to-day detail and keep you close to every milestone."],
     ["Can I visit the yard?", "Yes. Owners are invited to private stable mornings and selected gallops visits by appointment."],
-    ["What is included in my share?", "Your share includes the horse, training and ownership administration described in the relevant schedule, plus invitations to Maison owner experiences."]
+    ["What is included in my share?", "Your share includes the horse, training and ownership administration described in the relevant schedule, plus invitations to Vanguard partner experiences."]
   ]
 };
 
@@ -79,8 +79,8 @@ window.SYNDICATE_CONFIG = {
 
 function horseCard(horse, config) {
   return `<article class="horse-card" data-category="${horse.category}">
-    <div class="horse-image-wrap"><img src="${config.images.horses[horse.image]}" alt="${horse.name}, ${horse.pedigree}" loading="lazy"><span class="availability">${horse.availability}</span></div>
-    <div class="horse-card-body"><div class="horse-topline"><span>${horse.age}</span><span>${horse.category}</span></div><h3>${horse.name}</h3><p class="pedigree">${horse.pedigree}</p><p class="trainer">Trained by <strong>${horse.trainer}</strong></p><div class="share-row"><span>Share availability</span><strong>${horse.remaining}%</strong></div><div class="progress"><span style="width:${horse.remaining}%"></span></div><a class="text-link" href="contact.html?horse=${encodeURIComponent(horse.name)}">Enquire about share <span>↗</span></a></div>
+    <div class="horse-image-wrap"><img src="${config.images.horses[horse.image]}" alt="${horse.name}, ${horse.pedigree}" loading="eager"><span class="availability">${horse.availability}</span></div>
+    <div class="horse-card-body"><div class="horse-topline"><span>${horse.age}</span><span>${horse.category}</span></div><h3>${horse.name}</h3><div class="pedigree-grid"><span><b>Sire</b>${horse.sire}</span><span><b>Dam</b>${horse.dam}</span><span><b>Trainer</b>${horse.trainer}</span><span><b>Target circuit</b>${horse.circuit}</span></div><div class="share-row"><span>Share availability</span><strong>${horse.remaining}%</strong></div><div class="progress"><span style="width:${horse.remaining}%"></span></div><a class="button dark card-button" href="contact.html?horse=${encodeURIComponent(horse.name)}">Enquire about share <span>↗</span></a></div>
   </article>`;
 }
 

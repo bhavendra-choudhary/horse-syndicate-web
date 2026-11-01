@@ -42,11 +42,29 @@ def render_pages():
         desktop = browser.new_page(viewport={"width": 1440, "height": 900}, device_scale_factor=1)
         for filename, screenshot, _ in PAGES:
             desktop.goto((ROOT / filename).as_uri(), wait_until="domcontentloaded")
-            desktop.wait_for_timeout(2500)
+            try:
+                desktop.wait_for_load_state("networkidle", timeout=15000)
+            except Exception:
+                pass
+            desktop.wait_for_timeout(1500)
+            desktop.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+            desktop.wait_for_timeout(800)
+            desktop.evaluate("window.scrollTo(0, 0)")
+            desktop.wait_for_timeout(400)
             desktop.screenshot(path=str(ROOT / screenshot), full_page=True)
+            if filename == "about.html":
+                desktop.locator(".horses").screenshot(path=str(ROOT / "About_Upcoming_Horses_Grid.png"))
         mobile = browser.new_page(viewport={"width": 390, "height": 844}, device_scale_factor=1)
         mobile.goto((ROOT / "index.html").as_uri(), wait_until="domcontentloaded")
-        mobile.wait_for_timeout(2500)
+        try:
+            mobile.wait_for_load_state("networkidle", timeout=15000)
+        except Exception:
+            pass
+        mobile.wait_for_timeout(1500)
+        mobile.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+        mobile.wait_for_timeout(700)
+        mobile.evaluate("window.scrollTo(0, 0)")
+        mobile.wait_for_timeout(300)
         mobile.screenshot(path=str(ROOT / "Mobile_Responsive_View.png"), full_page=True)
         browser.close()
 
@@ -62,31 +80,40 @@ def fit_image(image, size):
 def compose_board():
     board = Image.new("RGB", (W, H), BG)
     draw = ImageDraw.Draw(board)
-    label(draw, (96, 75), "MAISON THOROUGHBRED", 17)
-    label(draw, (96, 116), "A modern ownership experience.", 34, serif=True)
+    label(draw, (96, 75), "VANGUARD THOROUGHBREDS", 17)
+    label(draw, (96, 116), "Direct access to classic glory.", 34, serif=True)
     label(draw, (1824, 88), "REAL BROWSER RENDERS  /  2026", 11, MUTED, anchor="ra")
     draw.line((96, 172, 1824, 172), fill="#D6D1C8", width=2)
 
-    boxes = [(96, 240, 560, 710), (680, 240, 560, 710), (1264, 240, 560, 710)]
-    for (filename, screenshot, title), (x, y, width, height) in zip(PAGES, boxes):
+    boxes = [(96, 220, 560, 650), (680, 220, 560, 650), (1264, 220, 560, 650)]
+    showcase_images = [
+        ROOT / "1_Landing_Page.png",
+        ROOT / "About_Upcoming_Horses_Grid.png",
+        ROOT / "3_Contact_Page.png",
+    ]
+    for (filename, screenshot, title), showcase_image, (x, y, width, height) in zip(PAGES, showcase_images, boxes):
         draw.rounded_rectangle((x, y, x + width, y + height), 14, fill=WHITE, outline="#DEDAD1", width=2)
         draw.rectangle((x, y, x + width, y + 44), fill=CHARCOAL)
         label(draw, (x + 24, y + 22), title, 13, WHITE)
-        browser_image = Image.open(ROOT / screenshot)
+        browser_image = Image.open(showcase_image)
+        if showcase_image.name == "1_Landing_Page.png":
+            browser_image = browser_image.crop((0, 0, min(browser_image.width, 1440), min(browser_image.height, 1100)))
+        elif showcase_image.name == "3_Contact_Page.png":
+            browser_image = browser_image.crop((0, 0, min(browser_image.width, 1440), min(browser_image.height, 1100)))
         preview = fit_image(browser_image, (width - 34, height - 70))
         board.paste(preview, (x + 17, y + 58))
 
-    label(draw, (96, 1040), "OWNERSHIP, ELEVATED.", 12, GOLD)
-    label(draw, (96, 1085), "Desktop clarity. Mobile intimacy.", 31, serif=True)
-    mobile = fit_image(Image.open(ROOT / "Mobile_Responsive_View.png"), (270, 300))
-    x, y = 1320, 1000
-    draw.rounded_rectangle((x, y, x + 270, y + 300), 18, fill=CHARCOAL)
+    label(draw, (96, 1010), "OWNERSHIP, ELEVATED.", 12, GOLD)
+    label(draw, (96, 1055), "Desktop clarity. Mobile intimacy.", 31, serif=True)
+    mobile = fit_image(Image.open(ROOT / "Mobile_Responsive_View.png").crop((0, 0, 390, min(1800, Image.open(ROOT / "Mobile_Responsive_View.png").height))), (300, 330))
+    x, y = 1250, 990
+    draw.rounded_rectangle((x, y, x + 300, y + 350), 18, fill=CHARCOAL)
     board.paste(mobile, (x + 10, y + 10))
-    label(draw, (1620, 1070), "Responsive by design", 18, serif=True)
-    label(draw, (1620, 1105), "Real Playwright screenshots", 11, MUTED)
-    label(draw, (1620, 1130), "Clean HTML5 / CSS3 / vanilla JS", 11, MUTED)
+    label(draw, (1600, 1060), "Responsive by design", 18, serif=True)
+    label(draw, (1600, 1095), "Large editorial crops", 11, MUTED)
+    label(draw, (1600, 1120), "Real Playwright renders", 11, MUTED)
     draw.line((96, 1285, 1824, 1285), fill="#D6D1C8", width=2)
-    label(draw, (96, 1320), "*  CURATED HORSES  /  CONSIDERED OWNERSHIP  /  RACE DAY, ELEVATED", 10, MUTED)
+    label(draw, (96, 1320), "*  CURATED BLOODSTOCK  /  CLEAR ECONOMICS  /  CLASSIC GLORY", 10, MUTED)
     board.save(BOARD, "PNG", optimize=True)
 
 
