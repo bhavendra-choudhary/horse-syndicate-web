@@ -29,9 +29,9 @@ window.SYNDICATE_CONFIG = {
     philosophy: ["Pedigree with purpose", "Athleticism under pressure", "Performance over promise"]
   },
   horses: [
-    { name: "Aurelia", category: "Fillies", age: "3yo filly", pedigree: "Into Mischief × Golden Hour", sire: "Into Mischief", dam: "Golden Hour", trainer: "Brad H. Cox", circuit: "Keeneland / Saratoga", availability: "Only 15% remaining", remaining: 15, image: 0, note: "An athletic filly with a sharp turn of foot and the composure to thrive on the biggest American stages." },
-    { name: "Nocturne", category: "2YO Colts", age: "2yo colt", pedigree: "Curlin × Midnight Bloom", sire: "Curlin", dam: "Midnight Bloom", trainer: "Todd A. Pletcher", circuit: "Belmont / Saratoga", availability: "Only 25% remaining", remaining: 25, image: 1, note: "A deep-bodied colt with a professional mind, scope to develop and a pedigree built for classic distance." },
-    { name: "Valentino", category: "In Training", age: "4yo colt", pedigree: "Quality Road × Valentina", sire: "Quality Road", dam: "Valentina", trainer: "Chad C. Brown", circuit: "Santa Anita / Keeneland", availability: "Only 10% remaining", remaining: 10, image: 2, note: "A proven performer with tactical speed, polished racecraft and an appetite for championship company." }
+    { name: "Aurelia", category: "Fillies", age: "3yo filly", pedigree: "Into Mischief × Golden Hour", sire: "Into Mischief", dam: "Golden Hour", trainer: "Brad H. Cox", circuit: "Keeneland / Saratoga", speed: "Beyer 98+", availability: "Only 15% remaining", remaining: 15, image: 0, note: "An athletic filly with a sharp turn of foot and the composure to thrive on the biggest American stages." },
+    { name: "Nocturne", category: "2YO Colts", age: "2yo colt", pedigree: "Curlin × Midnight Bloom", sire: "Curlin", dam: "Midnight Bloom", trainer: "Todd A. Pletcher", circuit: "Belmont / Saratoga", speed: "Beyer 101", availability: "Only 25% remaining", remaining: 25, image: 1, note: "A deep-bodied colt with a professional mind, scope to develop and a pedigree built for classic distance." },
+    { name: "Valentino", category: "In Training", age: "4yo colt", pedigree: "Quality Road × Valentina", sire: "Quality Road", dam: "Valentina", trainer: "Chad C. Brown", circuit: "Santa Anita / Keeneland", speed: "Beyer 104", availability: "Only 10% remaining", remaining: 10, image: 2, note: "A proven performer with tactical speed, polished racecraft and an appetite for championship company." }
   ],
   faqs: [
     ["How does a syndicate share work?", "You own a defined percentage of a racehorse through a simple syndicate structure. We manage the day-to-day detail and keep you close to every milestone."],
@@ -49,16 +49,18 @@ window.SYNDICATE_CONFIG = {
   document.querySelectorAll("[data-location]").forEach((el) => { el.textContent = c.contact.location; });
   const page = document.body.dataset.page;
   if (page === "home") {
-    document.querySelector("[data-status]").textContent = c.home.status;
-    document.querySelector("[data-home-headline]").innerHTML = c.home.headline;
-    document.querySelector("[data-home-intro]").textContent = c.home.intro;
-    document.querySelector("[data-value-title]").innerHTML = c.home.valueTitle;
-    document.querySelector("[data-value-body]").textContent = c.home.valueBody;
-    document.querySelector("[data-hero-image]").src = c.images.hero;
-    document.querySelector("[data-metrics]").innerHTML = c.home.metrics.map(([value, label]) => `<div class="metric"><strong>${value}</strong><span>${label}</span></div>`).join("");
-    document.querySelector("[data-steps]").innerHTML = c.home.steps.map((step) => `<article class="editorial-card"><span class="card-number">${step.number}</span><h3>${step.title}</h3><p>${step.body}</p><span class="card-rule"></span></article>`).join("");
-    document.querySelector("[data-testimonials]").innerHTML = c.home.testimonials.map(([quote, byline]) => `<blockquote><p>${quote}</p><cite>${byline}</cite></blockquote>`).join("");
-    document.querySelector("[data-home-horses]").innerHTML = c.horses.slice(0, 3).map((horse) => horseCard(horse, c)).join("");
+    const setText = (selector, value, html = false) => { const element = document.querySelector(selector); if (element) html ? element.innerHTML = value : element.textContent = value; };
+    const setAttribute = (selector, attribute, value) => { const element = document.querySelector(selector); if (element) element.setAttribute(attribute, value); };
+    setText("[data-status]", c.home.status);
+    setText("[data-home-headline]", c.home.headline, true);
+    setText("[data-home-intro]", c.home.intro);
+    setText("[data-value-title]", c.home.valueTitle, true);
+    setText("[data-value-body]", c.home.valueBody);
+    setAttribute("[data-hero-image]", "src", c.images.hero);
+    setText("[data-metrics]", c.home.metrics.map(([value, label]) => `<div class="metric"><strong>${value}</strong><span>${label}</span></div>`).join(""), true);
+    setText("[data-steps]", c.home.steps.map((step) => `<article class="process-card"><span>${step.number}</span><h3>${step.title}</h3><p>${step.body}</p></article>`).join(""), true);
+    setText("[data-testimonials]", c.home.testimonials.map(([quote, byline]) => `<blockquote><p>${quote}</p><cite>${byline}</cite></blockquote>`).join(""), true);
+    setText("[data-home-horses]", c.horses.slice(0, 3).map((horse) => horseCard(horse, c)).join(""), true);
   }
   if (page === "about") {
     document.querySelector("[data-about-eyebrow]").textContent = c.about.eyebrow;
@@ -86,12 +88,12 @@ function horseCard(horse, config) {
 
 function renderHorseGrid(config) {
   const grid = document.querySelector("[data-horse-grid]");
-  grid.innerHTML = config.horses.map((horse) => `${horseCard(horse, config)}<div class="horse-detail"><div><span class="eyebrow">Pedigree</span><p><strong>Sire</strong>${horse.sire}</p><p><strong>Dam</strong>${horse.dam}</p></div><div><span class="eyebrow">Trainer’s note</span><p>${horse.note}</p></div></div>`).join("");
+  grid.innerHTML = config.horses.map((horse) => `<div class="horse-showcase-item">${horseCard(horse, config)}<div class="horse-detail"><div><span class="eyebrow">Pedigree</span><p><strong>Sire</strong>${horse.sire}</p><p><strong>Dam</strong>${horse.dam}</p><p><strong>Beyer</strong>${horse.speed}</p><p><strong>Circuit</strong>${horse.circuit}</p></div><div><span class="eyebrow">Trainer’s note</span><p>${horse.note}</p></div></div></div>`).join("");
   document.querySelectorAll("[data-filter]").forEach((button) => button.addEventListener("click", () => {
     document.querySelectorAll("[data-filter]").forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
     const filter = button.dataset.filter;
     document.querySelectorAll(".horse-card").forEach((card) => { card.hidden = filter !== "All" && card.dataset.category !== filter; });
-    document.querySelectorAll(".horse-detail").forEach((detail) => { detail.hidden = filter !== "All" && detail.previousElementSibling.hidden; });
+    document.querySelectorAll(".horse-showcase-item").forEach((item) => { item.hidden = filter !== "All" && item.querySelector(".horse-card").dataset.category !== filter; });
   }));
 }

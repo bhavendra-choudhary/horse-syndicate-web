@@ -46,7 +46,7 @@ def render_pages():
                 desktop.wait_for_load_state("networkidle", timeout=15000)
             except Exception:
                 pass
-            desktop.wait_for_timeout(1500)
+            desktop.wait_for_timeout(5000 if filename == "index.html" else 1500)
             desktop.evaluate("window.scrollTo(0, document.body.scrollHeight)")
             desktop.wait_for_timeout(800)
             desktop.evaluate("window.scrollTo(0, 0)")
@@ -60,7 +60,7 @@ def render_pages():
             mobile.wait_for_load_state("networkidle", timeout=15000)
         except Exception:
             pass
-        mobile.wait_for_timeout(1500)
+        mobile.wait_for_timeout(5000)
         mobile.evaluate("window.scrollTo(0, document.body.scrollHeight)")
         mobile.wait_for_timeout(700)
         mobile.evaluate("window.scrollTo(0, 0)")
