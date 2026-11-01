@@ -2,7 +2,7 @@
 
 ## 1. Put the files online
 
-Keep all files in the same folder and upload them to your web host. Open `index.html` to check the site. No build step or database is needed. The three pages share their visual system through `styles.css`.
+Keep all files in the same folder and upload them to your web host, including the `images` folder. Open `index.html` to check the site. No build step or database is needed. The three pages share their visual system through `styles.css`.
 
 ## 2. Change your inbox
 
@@ -14,21 +14,31 @@ email: "hello@maisonthoroughbred.com"
 
 Replace the address with your inbox. The contact links and enquiry form will update automatically. FormSubmit may send a one-time confirmation email the first time you use a new address.
 
-## 3. Swap images
+## 3. Refresh the local racehorse images
 
-In the same file, replace the URLs after `hero`, `story`, and inside `horses`. You can use image URLs from your own website or a service such as Cloudinary. For local images, upload them beside these files and use paths such as `images/hero.jpg`.
+The site uses five real JPEG photographs downloaded from Wikimedia Commons. To refresh them, run:
+
+```text
+python download_racehorse_images.py
+```
+
+The script searches “Thoroughbred horse racing”, “Racehorse galloping”, and “Thoroughbred paddock”, saves five files into `images`, and verifies each one as a valid JPEG.
+
+## 4. Swap images
+
+In `site-content.js`, replace the paths after `hero`, `story`, and inside `horses`. Keep images in the `images` folder and use paths such as `images/hero.jpg`.
 
 Use wide, high-quality images. The recommended ratio is 3:2 for the hero and story images, and 4:5 for horse cards.
 
-## 4. Edit wording and horses
+## 5. Edit wording and horses
 
 All visible wording is grouped in `site-content.js`: `home`, `about`, and `horses`. Change the text between quotation marks, keeping the commas and quotation marks in place. Add or remove horse objects by copying the existing format.
 
-## 5. Preview on mobile
+## 6. Preview on mobile
 
 Open the site in a browser and resize the window, or use your browser’s device toolbar. The layout automatically adapts for phones and tablets.
 
-## 6. Rebuild the presentation screenshots
+## 7. Rebuild the presentation screenshots
 
 The supplied `generate_showcase.py` uses Playwright and a headless Chromium browser to capture real rendered pages. To run it on a new computer:
 
