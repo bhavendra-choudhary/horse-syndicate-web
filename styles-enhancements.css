@@ -87,6 +87,10 @@ body[data-page="contact"] .join-options button{min-height:52px;padding:10px;bord
 body[data-page="contact"] .join-options button:hover,body[data-page="contact"] .join-options button.selected{color:#0A0B0E;background:var(--champagne)}
 body[data-page="contact"] main.contact-layout{align-items:start !important}
 body[data-page="contact"] main.contact-layout>.form-card{height:auto !important;min-height:0 !important;align-self:start !important;padding-bottom:36px !important}
+.form-card .submit{white-space:nowrap !important;height:50px !important;min-height:50px !important;max-height:50px !important;padding:0 24px !important;font-size:13px !important;line-height:1 !important;display:inline-flex !important;align-items:center !important;justify-content:center !important}
+.nav .logo>.crest,.site-nav .brand-lockup>.crest{width:35px;height:35px;border:1.5px solid #D4AF37}
+.nav .logo>span:first-child.crest,.site-nav .brand-lockup>span:first-child.crest{border:1.5px solid #D4AF37 !important;color:#D4AF37 !important}
+.nav .logo>span:first-child.crest::before,.site-nav .brand-lockup>span:first-child.crest::before{border-color:#D4AF37 !important}
 .form-card h2{color:#F5F2EB}.field input,.field select{color:#F5F2EB;border-color:rgba(212,175,55,.35)}.field select option{color:#111;background:#F5F2EB}
 @media(max-width:760px){.horse-showcase{display:block}.horse-showcase-item{margin-bottom:28px}.membership-grid{grid-template-columns:1fr}.viewings>div{display:block}.viewings>div strong{display:block;margin-top:5px;text-align:left}}
 
