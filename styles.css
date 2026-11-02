@@ -217,3 +217,51 @@ body[data-page="contact"] .contact-hero img {
   max-height: none !important;
   object-fit: cover !important;
 }
+body[data-page="about"] .about-horse-card {
+  height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+  padding: 0; overflow: visible; background: rgba(255,255,255,.04);
+  border: 1px solid rgba(212,175,55,.28);
+}
+body[data-page="about"] .about-horse-image {
+  position: relative; height: 240px; width: 100%; overflow: visible;
+}
+body[data-page="about"] .about-horse-image img {
+  display: block; width: 100%; height: 240px; object-fit: cover;
+}
+body[data-page="about"] .about-horse-content {
+  display: flex; flex: 1; flex-direction: column; justify-content: space-between;
+  gap: 18px; padding: 24px;
+}
+body[data-page="about"] .about-horse-heading {
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
+}
+body[data-page="about"] .about-horse-heading h3 {
+  margin: 8px 0 0; color: var(--warm-white); font: 500 34px/1.05 var(--serif);
+}
+body[data-page="about"] .about-horse-category,
+body[data-page="about"] .about-horse-class {
+  color: var(--champagne); font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+}
+body[data-page="about"] .about-pedigree {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  padding: 18px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+body[data-page="about"] .about-pedigree span { display: flex; flex-direction: column; gap: 5px; color: var(--warm-white); font: 16px/1.2 var(--serif); }
+body[data-page="about"] .about-pedigree b { color: var(--muted); font: 9px var(--sans); letter-spacing: .14em; text-transform: uppercase; }
+body[data-page="about"] .about-trainer-note p { margin: 8px 0 0; color: #b7bbb7; font-size: 13px; line-height: 1.55; }
+body[data-page="about"] .about-horse-card .card-button { margin-top: 0; }
+body[data-page="contact"] .join-active {
+  box-shadow: 0 0 0 2px #FFF6CC, 0 6px 24px rgba(212,175,55,.55);
+}
+nav a.button::before, nav a.button::after, nav a.button:hover::before, nav a.button:hover::after,
+nav a.button:focus::before, nav a.button:focus::after, nav a.button:active::before, nav a.button:active::after,
+.nav-cta::before, .nav-cta::after, .nav-cta:hover::before, .nav-cta:hover::after,
+.nav-cta:focus::before, .nav-cta:focus::after, .nav-cta:active::before, .nav-cta:active::after {
+  content: none !important; display: none !important; width: 0 !important; height: 0 !important;
+}
+nav a.button, .nav-cta { text-decoration: none !important; }
+nav a.button:hover, .nav-cta:hover { filter: brightness(1.08); transform: translateY(-1px); }
+body[data-page="contact"] .join-selector { margin-bottom: 28px; padding-bottom: 24px; border-bottom: 1px solid rgba(212,175,55,.28); }
+body[data-page="contact"] .join-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+body[data-page="contact"] .join-options button { min-height: 52px; padding: 10px; border: 1px solid rgba(212,175,55,.35); color: var(--warm-white); background: rgba(212,175,55,.08); cursor: pointer; font-size: 11px; font-weight: 700; }
+body[data-page="contact"] .join-options button:hover, body[data-page="contact"] .join-options button.selected { color: #0A0B0E; background: var(--champagne); }

@@ -88,12 +88,18 @@ function horseCard(horse, config) {
 
 function renderHorseGrid(config) {
   const grid = document.querySelector("[data-horse-grid]");
-  grid.innerHTML = config.horses.map((horse) => `<div class="horse-showcase-item">${horseCard(horse, config)}<div class="horse-detail"><div><span class="eyebrow">Pedigree</span><p><strong>Sire</strong>${horse.sire}</p><p><strong>Dam</strong>${horse.dam}</p><p><strong>Beyer</strong>${horse.speed}</p><p><strong>Circuit</strong>${horse.circuit}</p></div><div><span class="eyebrow">Trainer’s note</span><p>${horse.note}</p></div></div></div>`).join("");
+  grid.innerHTML = config.horses.map((horse) => `<article class="about-horse-card" data-category="${horse.category}">
+    <div class="about-horse-image"><img src="${config.images.horses[horse.image]}" alt="${horse.name}, ${horse.pedigree}" loading="eager"><span class="availability">${horse.availability}</span></div>
+    <div class="about-horse-content"><div class="about-horse-heading"><div><span class="about-horse-category">${horse.age}</span><h3>${horse.name}</h3></div><span class="about-horse-class">${horse.category}</span></div>
+    <div class="about-pedigree"><span><b>Sire</b>${horse.sire}</span><span><b>Dam</b>${horse.dam}</span><span><b>Beyer</b>${horse.speed}</span><span><b>Circuit</b>${horse.circuit}</span></div>
+    <div class="about-trainer-note"><span class="eyebrow">Trainer’s note</span><p>${horse.note}</p></div>
+    <div class="share-row"><span>Share availability</span><strong>${horse.remaining}%</strong></div><div class="progress"><span style="width:${horse.remaining}%"></span></div>
+    <a class="button dark card-button" href="contact.html?intent=join&horse=${encodeURIComponent(horse.name)}">Enquire about share <span>↗</span></a></div>
+  </article>`).join("");
   document.querySelectorAll("[data-filter]").forEach((button) => button.addEventListener("click", () => {
     document.querySelectorAll("[data-filter]").forEach((item) => item.classList.remove("active"));
     button.classList.add("active");
     const filter = button.dataset.filter;
-    document.querySelectorAll(".horse-card").forEach((card) => { card.hidden = filter !== "All" && card.dataset.category !== filter; });
-    document.querySelectorAll(".horse-showcase-item").forEach((item) => { item.hidden = filter !== "All" && item.querySelector(".horse-card").dataset.category !== filter; });
+    document.querySelectorAll(".about-horse-card").forEach((card) => { card.hidden = filter !== "All" && card.dataset.category !== filter; });
   }));
 }
