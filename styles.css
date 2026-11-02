@@ -265,3 +265,5 @@ body[data-page="contact"] .join-selector { margin-bottom: 28px; padding-bottom: 
 body[data-page="contact"] .join-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 body[data-page="contact"] .join-options button { min-height: 52px; padding: 10px; border: 1px solid rgba(212,175,55,.35); color: var(--warm-white); background: rgba(212,175,55,.08); cursor: pointer; font-size: 11px; font-weight: 700; }
 body[data-page="contact"] .join-options button:hover, body[data-page="contact"] .join-options button.selected { color: #0A0B0E; background: var(--champagne); }
+body[data-page="contact"] main.contact-layout { align-items: start !important; }
+body[data-page="contact"] main.contact-layout > .form-card { height: auto !important; min-height: 0 !important; align-self: start !important; padding-bottom: 36px !important; }
