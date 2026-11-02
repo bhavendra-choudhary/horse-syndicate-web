@@ -1,7 +1,7 @@
 // Central editing file: update the brand, inbox, copy, horse profiles and image paths here.
 window.SYNDICATE_CONFIG = {
   brand: { name: "Vanguard Thoroughbreds", shortName: "Vanguard TB", tagline: "Command the rail. Own the legacy.", colors: { charcoal: "#111111", white: "#FFFFFF", warmWhite: "#F8F7F4", gold: "#C5A059" } },
-  contact: { email: "concierge@vanguardthoroughbreds.com", phone: "+1 (859) 555-0194", location: "Lexington, Kentucky · Saratoga Springs (by appointment)" },
+  contact: { email: "vanguardthoroughbreds.usa@gmail.com", phone: "+1 (859) 555-0194", location: "Lexington, Kentucky · Saratoga Springs (by appointment)" },
   images: { hero: "images/hero-racehorse.jpg", story: "images/story-horse.jpg", horses: ["images/horse-1.jpg", "images/horse-2.jpg", "images/horse-3.jpg"] },
   home: {
     status: "2026 Keeneland & Saratoga acquisitions open",

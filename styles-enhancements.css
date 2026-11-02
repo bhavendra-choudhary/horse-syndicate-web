@@ -54,5 +54,16 @@ body{background:#0A0B0E;color:#F5F2EB}
 .horse-showcase,.horse-showcase-item,.horse-showcase-item .horse-card,.horse-showcase-item .horse-detail,.horse-detail,.horse-card{height:auto !important;min-height:0 !important}
 .horse-showcase{padding-bottom:28px !important}
 .hero-actions .button,.hero-actions .outline-button,.btn,.cta-btn{white-space:nowrap !important;display:inline-flex !important;align-items:center !important;justify-content:center !important;gap:10px !important;line-height:1 !important;height:52px !important;padding:0 28px !important}
+body[data-page="about"] .story{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:stretch}
+body[data-page="about"] .story-image,body[data-page="about"] .story-copy{height:400px;box-sizing:border-box}
+body[data-page="about"] .story-image{min-height:0 !important}
+body[data-page="about"] .story-copy{padding:28px 36px;display:flex;flex-direction:column;justify-content:space-between;margin:0}
+body[data-page="about"] .horse-showcase{display:grid;grid-template-columns:repeat(3,1fr);align-items:stretch}
+body[data-page="about"] .horse-showcase-item{display:flex;flex-direction:column;min-width:0}
+body[data-page="about"] .horse-showcase-item .horse-detail{height:100% !important;display:flex !important;flex-direction:column !important;justify-content:space-between !important;box-sizing:border-box !important}
+body[data-page="about"] footer.footer{position:relative !important;clear:both !important;margin-top:80px !important}
+body[data-page="contact"] main.contact-layout{margin-top:110px !important;padding-top:32px !important}
+body[data-page="contact"] .contact-hero{height:auto;max-height:none}
+body[data-page="contact"] .contact-hero img{width:100% !important;height:auto !important;max-height:none !important;object-fit:cover !important}
 .form-card h2{color:#F5F2EB}.field input,.field select{color:#F5F2EB;border-color:rgba(212,175,55,.35)}.field select option{color:#111;background:#F5F2EB}
 @media(max-width:760px){.horse-showcase{display:block}.horse-showcase-item{margin-bottom:28px}.membership-grid{grid-template-columns:1fr}.viewings>div{display:block}.viewings>div strong{display:block;margin-top:5px;text-align:left}}
