@@ -4,7 +4,7 @@ window.SYNDICATE_CONFIG = {
   contact: { email: "vanguardthoroughbreds.usa@gmail.com", phone: "+1 (859) 555-0194", location: "Lexington, Kentucky · Saratoga Springs (by appointment)" },
   images: { hero: "images/hero-racehorse.jpg", story: "images/story-horse.jpg", horses: ["images/horse-1.jpg", "images/horse-2.jpg", "images/horse-3.jpg"] },
   home: {
-    status: "2026 Keeneland & Saratoga acquisitions open",
+    status: "Keeneland & Saratoga acquisitions open",
     headline: "Command the Rail.<br><em>Own the Legacy.</em>",
     intro: "Direct fractional ownership in elite Grade-1 caliber Thoroughbreds. Curated bloodlines, Hall-of-Fame trainers, and full paddock-to-winner's-circle access.",
     valueTitle: "Championship Pedigrees.<br><em>Institutional Transparency.</em>",
@@ -44,6 +44,7 @@ window.SYNDICATE_CONFIG = {
   const c = window.SYNDICATE_CONFIG;
   Object.entries(c.brand.colors).forEach(([key, value]) => document.documentElement.style.setProperty(`--${key.replace(/[A-Z]/g, (m) => `-${m.toLowerCase()}`)}`, value));
   document.querySelectorAll("[data-brand]").forEach((el) => { el.textContent = c.brand.name; });
+  document.querySelectorAll("[data-year]").forEach((el) => { el.textContent = new Date().getFullYear(); });
   document.querySelectorAll("[data-email]").forEach((el) => { el.textContent = c.contact.email; el.href = `mailto:${c.contact.email}`; });
   document.querySelectorAll("[data-phone]").forEach((el) => { el.textContent = c.contact.phone; el.href = `tel:${c.contact.phone.replace(/\s/g, "")}`; });
   document.querySelectorAll("[data-location]").forEach((el) => { el.textContent = c.contact.location; });
